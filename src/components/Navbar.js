@@ -82,7 +82,9 @@ export default function NavigationBar() {
         >
           {user ? (
             <>
-              <Avatar name={user.name} src={user.avatar} />
+              <Link to="/dashboard">
+                <Avatar name={user.name} src={user.avatar} />
+              </Link>
               <Button
                 onClick={logout}
                 display={{ base: "none", md: "inline-flex" }}

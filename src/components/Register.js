@@ -32,7 +32,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await register(fName, lName, email, password, role);
+      await register(fName, lName, email, address, phoneNumber, password, role);
       toast({
         title: "Registered",
         description: "You have successfully registered.",
@@ -108,7 +108,7 @@ export default function Register() {
                   <FormControl id="phoneNumber">
                     <FormLabel>Phone Number</FormLabel>
                     <Input
-                      type="text"
+                      type="number"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
                       placeholder="Phone Number"
