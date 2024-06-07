@@ -16,7 +16,7 @@ export const UserProvider = ({ children }) => {
     }, []);
 
     const login = async (email, password) => {
-        const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
+        const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users/login`, { email, password });
         const { token } = response.data;
         localStorage.setItem('token', token);
         const decoded = jwtDecode(token);
@@ -24,7 +24,7 @@ export const UserProvider = ({ children }) => {
     };
 
     const register = async (fName, lName, email, password, role) => {
-        const response = await axios.post('http://localhost:5000/api/users/register', { fName, lName, email, password, role });
+        const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users/register`, { fName, lName, email, password, role });
         const { token } = response.data;
         localStorage.setItem('token', token);
         const decoded = jwtDecode(token);

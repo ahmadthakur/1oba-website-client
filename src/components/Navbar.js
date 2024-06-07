@@ -15,6 +15,7 @@ import {
   useDisclosure,
   Image,
   Spacer,
+  Avatar,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import {
@@ -79,38 +80,53 @@ export default function NavigationBar() {
           direction={"row"}
           spacing={6}
         >
-          <Button
-            py={2}
-            px={4}
-            fontSize={"sm"}
-            fontWeight={400}
-            variant={"link"}
-            as={Link}
-            to={"/login"}
-            border={"1px"}
-            _hover={{
-              bg: "grey.300",
-            }}
-          >
-            <Box as={LogIn} mr={2} /> Login
-          </Button>
-          <Button
-            py={2}
-            px={4}
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            variant={"link"}
-            color={"white"}
-            bg={"blue.400"}
-            as={Link}
-            to={"/register"}
-            _hover={{
-              bg: "blue.300",
-            }}
-          >
-            <Box as={UserPlus} mr={2} /> Register
-          </Button>
+          {user ? (
+            <>
+              <Avatar name={user.name} src={user.avatar} />
+              <Button
+                onClick={logout}
+                display={{ base: "none", md: "inline-flex" }}
+              >
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                py={2}
+                px={4}
+                fontSize={"sm"}
+                fontWeight={400}
+                variant={"link"}
+                as={Link}
+                to={"/login"}
+                border={"1px"}
+                _hover={{
+                  bg: "grey.300",
+                }}
+                display={{ base: "none", md: "inline-flex" }}
+              >
+                <Box as={LogIn} mr={2} /> Login
+              </Button>
+              <Button
+                py={2}
+                px={4}
+                fontSize={"sm"}
+                fontWeight={600}
+                variant={"link"}
+                color={"white"}
+                bg={"blue.400"}
+                as={Link}
+                to={"/register"}
+                _hover={{
+                  bg: "blue.300",
+                }}
+                display={{ base: "none", md: "inline-flex" }}
+              >
+                <Box as={UserPlus} mr={2} /> Register
+              </Button>
+            </>
+          )}
         </Stack>
       </Flex>
 
@@ -151,6 +167,8 @@ const DesktopNav = () => {
 };
 
 const MobileNav = () => {
+  const { user, logout } = useContext(UserContext);
+
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}
@@ -160,6 +178,20 @@ const MobileNav = () => {
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
+      {user ? (
+        <Button onClick={logout} w="full">
+          Logout
+        </Button>
+      ) : (
+        <>
+          <Button as={Link} to="/login" w="full" variant="ghost">
+            Login
+          </Button>
+          <Button as={Link} to="/register" w="full" colorScheme="blue">
+            Register
+          </Button>
+        </>
+      )}
     </Stack>
   );
 };
