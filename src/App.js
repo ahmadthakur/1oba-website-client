@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import MultiStepForm from "./components/MultiStepForm";
+import PropertyForm from "./components/PropertyForm";
 import { UserProvider } from "./context/UserContext";
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<MultiStepForm />} />
+          <Route path="/property-form" element={<PropertyForm />} />
         </Routes>
         <Footer />
       </Router>

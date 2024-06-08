@@ -37,7 +37,7 @@ const MultiStepForm = () => {
     moveInDate: "",
     propertyCondition: "Any",
     tenure: "Freehold",
-    propertyFeatures: "",
+    propertyFeatures: "Other",
     additionalRequirements: "",
     heardAboutUs: "Website",
     currentlyRenting: "No",
@@ -326,9 +326,9 @@ const Step3 = ({ formData, handleChange, nextStep, prevStep }) => (
         value={formData.propertyFeatures}
         onChange={handleChange}
       >
+        <option value="Other">Other</option>
         <option value="Balcony">Balcony</option>
         <option value="Garden">Garden</option>
-        <option value="Other">Other</option>
       </Select>
     </FormControl>
     <HStack width="100%" justifyContent="space-between">
