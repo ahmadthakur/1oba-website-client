@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import MultiStepForm from "./components/MultiStepForm";
 import { UserProvider } from "./context/UserContext";
 
 const App = () => {
@@ -17,7 +18,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<MultiStepForm />} />
         </Routes>
         <Footer />
       </Router>
