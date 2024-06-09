@@ -27,19 +27,25 @@ export default function LargeWithNewsletter() {
     <Box
       bg={useColorModeValue("gray.50", "gray.900")}
       color={useColorModeValue("gray.700", "gray.200")}
+      py={20}
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
         <Box align={"flex-start"} p={8} mb={8} borderRadius={12} background="linear-gradient(to right, #667DE8, #754DA5)">
-          <Heading mb={2}>Stay up to date</Heading>
-          <Stack direction={"row"}>
+          <Heading mb={8} textAlign={"center"} fontWeight={"400"}>Subscribe to our Newsletter</Heading>
+          <Stack direction={"row"} >
             <Input
               placeholder={"Your email address"}
               bg="white"
               color="black"
               border={0}
+              sx={{
+                '::placeholder': {
+                  color: 'gray.500', // Change this value to your desired placeholder color
+                },
+              }}
             />
             <IconButton
-              bg={useColorModeValue("blue.400", "blue.800")}
+              bg={useColorModeValue("blue.800", "blue.800")}
               color={useColorModeValue("white", "gray.800")}
               _hover={{
                 bg: "blue.600",
