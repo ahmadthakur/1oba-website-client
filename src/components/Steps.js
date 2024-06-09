@@ -7,9 +7,8 @@ import {
   Fade,
   Flex,
 } from "@chakra-ui/react";
-import { ArrowRightIcon } from "@chakra-ui/icons";
+import { ArrowRightCircle } from "react-feather";
 import { useState } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import Icon01 from "../images/icon01.png";
 import Icon02 from "../images/icon02.png";
@@ -28,10 +27,17 @@ const Steps = () => {
   };
 
   return (
-    <Box className="steps" p="120" bg="white">
-      <Box className="container">
-        <Flex className="row" gap={20}>
-          <Box className="col-md-6" flex={1} bg="#0D6EFD" borderRadius={12} p={6}>
+    <Box className="steps" p={{ base: "12", lg: "120" }} bg="white">
+      <Box className="container"  >
+        <Flex className="row" gap={20} >
+          <Box
+            className="col-md-6"
+            flex={1}
+            bg="#0D6EFD"
+            borderRadius={12}
+            p={6}
+            minW={{ base: "full", lg: "400px" }}
+          >
             <Box
               className="steps-list"
               bg="primary"
@@ -59,48 +65,32 @@ const Steps = () => {
                     data-step={index + 1}
                     onClick={() => handleClick(index + 1)}
                   >
-                    <ArrowRightIcon /> Step {index + 1}: {step}
+                    <Flex p={2} gap={2} width={{ base: "full", lg: "auto" }}>
+                      <ArrowRightCircle /> Step {index + 1}: {step}
+                    </Flex>
                   </ListItem>
                 ))}
               </List>
             </Box>
           </Box>
-          <Box className="col-md-6"flex={1}>
+          <Box className="col-md-6" flex={1}>
             <Box className="steps-images">
-              <TransitionGroup>
-                {images.map(
-                  (image, index) =>
-                    activeStep === index + 1 && (
-                      <CSSTransition
-                        key={index}
-                        timeout={500}
-                        classNames={{
-                          enter: "",
-                          enterActive: "",
-                          exit: "",
-                          exitActive: "",
-                        }}
-                        onEnter={(node) => {
-                          node.style.opacity = 0;
-                          setTimeout(() => {
-                            node.style.transition = "opacity 500ms";
-                            node.style.opacity = 1;
-                          }, 0);
-                        }}
-                        onExit={(node) => {
-                          node.style.transition = "opacity 500ms";
-                          node.style.opacity = 0;
-                        }}
-                      >
-                        <Image
-                          src={image}
-                          className="img-fluid step-image"
-                          alt={`Step ${index + 1}`}
-                        />
-                      </CSSTransition>
-                    )
-                )}
-              </TransitionGroup>
+              {images.map(
+                (image, index) =>
+                  activeStep === index + 1 && (
+                    <Image
+                      display={{ base: "none", lg: "block" }}
+                      src={image}
+                      className="img-fluid step-image transition-opacity"
+                      alt={`Step ${index + 1}`}
+                      style={{ transition: "opacity 500ms" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.opacity = 1)}
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.opacity = 0.5)
+                      }
+                    />
+                  )
+              )}
             </Box>
           </Box>
         </Flex>

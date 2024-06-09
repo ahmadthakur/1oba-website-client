@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { getProperties, deleteProperty } from "../api/propertyApi";
+import { getProperties } from "../api/propertyApi";
 import {
   Box,
   Flex,
   Image,
   Badge,
-  useColorModeValue,
   Button,
-  Icon,
   Text,
   Grid,
   GridItem,
-  VStack,
+  useColorModeValue,
+  Heading,
 } from "@chakra-ui/react";
 import { MapPin } from "react-feather";
 
-const PropertyList = (list) => {
+const PropertyList = () => {
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
@@ -26,91 +25,63 @@ const PropertyList = (list) => {
     fetchData();
   }, []);
 
-  var propertiesList = [];
-
-  if (list.length === 0) {
-    propertiesList = list;
-  } else {
-    propertiesList = properties;
-  }
-
   const boxBgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Box as="section" className="features" py={120} px={60}>
-      <Flex className="container" flexDirection="column">
-        <Grid
-          templateColumns="repeat(auto-fill, minmax(250px, 1fr))"
-          gap={6}
-          justifyContent="center"
-          alignItems="center"
-        >
-          {propertiesList.map((property) => (
-            <GridItem key={property._id}>
-              <Box
-                bg={boxBgColor}
-                maxW="sm"
-                borderWidth="1px"
-                rounded="lg"
-                shadow="lg"
-                position="relative"
-                m={5}
-                p={6}
-              >
-                <Image
-                  src={property.imageURL || "https://via.placeholder.com/150"}
-                  alt={`Picture of ${property.title}`}
-                  roundedTop="lg"
-                />
-                <Box p="6">
-                  <Box d="flex" alignItems="baseline">
-                    <Badge
-                      rounded="full"
-                      px="2"
-                      fontSize="0.8em"
-                      colorScheme="teal"
-                    >
-                      <MapPin />
-                      {property.location}
-                    </Badge>
-                  </Box>
-                  <Flex
-                    mt="1"
-                    justifyContent="space-between"
-                    alignContent="center"
-                  >
-                    <Box
-                      fontSize="2xl"
-                      fontWeight="semibold"
-                      as="h4"
-                      lineHeight="tight"
-                      isTruncated
-                    >
-                      {property.title}
-                    </Box>
-                  </Flex>
-                  <Text mt={2}>{property.description}</Text>
-                  <Flex
-                    justifyContent="space-between"
-                    alignContent="center"
-                    mt={3}
-                  >
-                    <Text fontSize="xl" fontWeight="bold">
-                      £{property.price}
-                    </Text>
-                    <Badge rounded="full" px="2" colorScheme="green">
-                      {property.numberOfRooms} Rooms
-                    </Badge>
-                  </Flex>
-                  <Button colorScheme="blue" mt={4}>
-                    See Details
-                  </Button>
-                </Box>
+    <Box as="section" py={120} px={{ base: 12, lg: 120 }} bg={"#f8f9fa"}>
+      <Heading mb={12} textAlign="center" color={"gray.800"}>
+        Flats and Houses to Rent and Buy details
+      </Heading>
+      <Grid templateColumns="repeat(auto-fill, minmax(250px, 1fr))" gap={6}>
+        {properties.map((property) => (
+          <GridItem key={property._id}>
+            <Box
+              bg={"white"}
+              color={"gray.800"}
+              borderWidth="1px"
+              rounded="lg"
+              shadow="lg"
+              p={5}
+              d="flex"
+              flexDirection="column"
+              justifyContent="space-between" // Ensures that the button aligns to the bottom
+            >
+              <Image
+                src={property.imageURL || "https://via.placeholder.com/150"}
+                alt={`Picture of ${property.title}`}
+                roundedTop="lg"
+                w="full"
+                h="200px"
+              />
+              <Box py={4}>
+                <Flex alignItems="center" mb={2} gap={2}>
+                  <MapPin size="16" />
+                  <Text fontWeight="bold" isTruncated>
+                    {property.location}
+                  </Text>
+                </Flex>
+                <Text fontSize="xl" fontWeight="semibold" mb={2} isTruncated>
+                  {property.title}
+                </Text>
+                <Text mb={2} isTruncated>
+                  {property.description}
+                </Text>
+                <Flex justifyContent="space-between" alignItems="center">
+                  <Text fontWeight="bold">
+                    £{new Intl.NumberFormat("en-GB").format(property.price)}
+                  </Text>
+                  <Badge colorScheme="green">
+                    {property.numberOfRooms} Rooms
+                  </Badge>
+                </Flex>
               </Box>
-            </GridItem>
-          ))}
-        </Grid>
-      </Flex>
+              <Button colorScheme="blue" mt={4} alignSelf="center">
+                See Details
+              </Button>
+            </Box>
+          </GridItem>
+        ))}
+      </Grid>
     </Box>
   );
 };

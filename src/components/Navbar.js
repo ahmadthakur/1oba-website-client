@@ -85,12 +85,14 @@ export default function NavigationBar() {
               <Link to="/dashboard">
                 <Avatar name={user.name} src={user.avatar} />
               </Link>
-              <Button
-                onClick={logout}
-                display={{ base: "none", md: "inline-flex" }}
-              >
-                Logout
-              </Button>
+              <Link to={"/login"}>
+                <Button
+                  onClick={logout}
+                  display={{ base: "none", md: "inline-flex" }}
+                >
+                  Logout
+                </Button>
+              </Link>
             </>
           ) : (
             <>
@@ -181,9 +183,11 @@ const MobileNav = () => {
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
       {user ? (
-        <Button onClick={logout} w="full">
-          Logout
-        </Button>
+        <Link to={"/login"}>
+          <Button onClick={logout} w="full">
+            Logout
+          </Button>
+        </Link>
       ) : (
         <>
           <Button as={Link} to="/login" w="full" variant="ghost">

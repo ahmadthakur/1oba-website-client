@@ -14,7 +14,10 @@ import {
   useToast,
   useColorModeValue,
   Stack,
+  Image,
 } from "@chakra-ui/react";
+
+import formImage from "../images/form.png";
 
 const MultiStepForm = () => {
   const toast = useToast();
@@ -121,9 +124,16 @@ const MultiStepForm = () => {
       minH={"100vh"}
       align={"center"}
       justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
+      bg={"white"}
+      gap={40}
     >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6} w={"500px"}>
+      <Image
+        src={formImage}
+        alt="Form Image"
+        w="500px"
+        display={{ base: "none", lg: "block" }}
+      />
+      <Stack spacing={8} maxW={"lg"} py={12} px={6} w={"500px"}>
         <Box
           rounded={"lg"}
           bg={useColorModeValue("white", "gray.700")}
@@ -211,7 +221,16 @@ const Step1 = ({ formData, handleChange, nextStep }) => (
         <option value="No">No</option>
       </Select>
     </FormControl>
-    <Button colorScheme="teal" onClick={nextStep} width="full">
+    <Button
+      type="submit"
+      bg={"blue.400"}
+      color={"white"}
+      _hover={{
+        bg: "blue.500",
+      }}
+      onClick={nextStep}
+      width="full"
+    >
       Next
     </Button>
   </VStack>
@@ -272,7 +291,16 @@ const Step2 = ({ formData, handleChange, nextStep, prevStep }) => (
       <Button onClick={prevStep} width="full">
         Back
       </Button>
-      <Button colorScheme="teal" onClick={nextStep} width="full">
+      <Button
+        type="submit"
+        bg={"blue.400"}
+        color={"white"}
+        _hover={{
+          bg: "blue.500",
+        }}
+        onClick={nextStep}
+        width="full"
+      >
         Next
       </Button>
     </HStack>
@@ -335,7 +363,16 @@ const Step3 = ({ formData, handleChange, nextStep, prevStep }) => (
       <Button onClick={prevStep} width="full">
         Back
       </Button>
-      <Button colorScheme="teal" onClick={nextStep} width="full">
+      <Button
+        type="submit"
+        bg={"blue.400"}
+        color={"white"}
+        _hover={{
+          bg: "blue.500",
+        }}
+        onClick={nextStep}
+        width="full"
+      >
         Next
       </Button>
     </HStack>
@@ -432,7 +469,16 @@ const Step4 = ({ formData, handleChange, nextStep, prevStep }) => (
       <Button onClick={prevStep} width="full">
         Back
       </Button>
-      <Button colorScheme="teal" onClick={nextStep} width="full">
+      <Button
+        type="submit"
+        bg={"blue.400"}
+        color={"white"}
+        _hover={{
+          bg: "blue.500",
+        }}
+        onClick={nextStep}
+        width="full"
+      >
         Next
       </Button>
     </HStack>
@@ -489,7 +535,15 @@ const Step5 = ({ formData, handleChange, prevStep, handleSubmit }) => (
       <Button onClick={prevStep} width="full">
         Back
       </Button>
-      <Button colorScheme="teal" type="submit" width="full">
+      <Button
+        type="submit"
+        bg={"blue.400"}
+        color={"white"}
+        _hover={{
+          bg: "blue.500",
+        }}
+        width="full"
+      >
         Submit
       </Button>
     </HStack>

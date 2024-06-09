@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
-
+import { useNavigate } from "react-router";
 import {
   Flex,
   Box,
@@ -23,6 +23,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const { login } = useContext(UserContext);
   const toast = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,6 +36,7 @@ export default function Login() {
         duration: 3000,
         isClosable: true,
       });
+      navigate("/dashboard");
     } catch (err) {
       console.error(err);
       toast({
@@ -48,12 +50,7 @@ export default function Login() {
   };
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
+    <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"white"}>
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6} w={"500px"}>
         <Box
           rounded={"lg"}

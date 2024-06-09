@@ -14,6 +14,8 @@ import {
   useColorModeValue,
   Select,
 } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 const PropertyForm = () => {
   const [title, setTitle] = useState("");
@@ -23,20 +25,43 @@ const PropertyForm = () => {
   const [location, setLocation] = useState("");
   const [numberOfRooms, setNumberOfRooms] = useState("");
   const { user } = useContext(UserContext);
+  const toast = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const property = {
-      title,
-      propertyType: "Other",
-      description,
-      price,
-      location,
-      numberOfRooms: "1",
-      userId: user.userId,
-    };
-    await createProperty(property);
+  e.preventDefault();
+  const property = {
+    title,
+    propertyType: "Other",
+    description,
+    price,
+    location,
+    numberOfRooms: "1",
+    userId: user.userId,
   };
+  try {
+    await createProperty(property);
+    // Success toast
+    toast({
+      title: "Property Created",
+      description: "Your property has been successfully created.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+    // Redirect to dashboard
+    navigate("/dashboard");
+  } catch (error) {
+    // Error toast
+    toast({
+      title: "Error",
+      description: `Failed to create property: ${error.message}`,
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+    });
+  }
+};
 
   return (
     <Flex
