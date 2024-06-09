@@ -1,17 +1,15 @@
 import React, { useContext, useEffect } from "react";
 import {
-  Center,
   Box,
   Heading,
   Text,
   Flex,
   Avatar,
-  Spacer,
   VStack,
   Button,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import PropertyForm from "../components/PropertyForm";
 import PropertyList from "../components/PropertyList";
 import { UserContext } from "../context/UserContext";
 
@@ -38,55 +36,51 @@ const Dashboard = () => {
         }
 
         const data = await response.json();
-        setUser(data); // Assuming the API returns the user data directly
+        setUser(data);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
 
     fetchUserData();
-  }, [setUser]); // Fixed dependency to setUser to ensure useEffect runs only once
+  }, [setUser]);
+
+  const bgColor = useColorModeValue("gray.50", "gray.700");
+  const borderColor = useColorModeValue("gray.200", "gray.600");
 
   return (
-    <Flex direction="column" align="center">
-      <Box p="2">
-        <Heading size="lg">Dashboard</Heading>
-      </Box>
-      <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" width="md">
-        <Box>
-          <Avatar name={`${user?.fName} ${user?.lName}`} />
-          <Text fontSize="md">
+    <Flex direction="column" align="center" mt={10} mb={60}>
+      <Heading size="xl" mb={6}>Dashboard</Heading>
+      <Box
+        p={5}
+        shadow="md"
+        borderWidth="1px"
+        borderRadius="md"
+        width="full"
+        maxW="md"
+        bg={bgColor}
+        borderColor={borderColor}
+      >
+        <Flex direction="column" align="center" mb={5}>
+          <Avatar name={`${user?.fName} ${user?.lName}`} size="xl" mb={3} />
+          <Text fontSize="xl" fontWeight="bold">
             Welcome, {user ? `${user.fName} ${user.lName}` : "Guest"}!
           </Text>
-        </Box>
-        <Box>
-          <Heading size="md" mb={3} textAlign="center">
-            User Information
-          </Heading>
-          <VStack align="start" spacing={3}>
-            <Text>First Name: {user?.fName}</Text>
-            <Text>Last Name: {user?.lName}</Text>
-            <Text>Address: {user?.address}</Text>
-            <Text>Phone Number: {user?.phoneNumber}</Text>
-            <Text>Email: {user?.email}</Text>
-            {/* Additional user data fields can be displayed here */}
-          </VStack>
-        </Box>
-      </Box>
-      <Box p={5}>
-        <Flex mb={5}>
-          <Spacer />
         </Flex>
-        <Link to="/property-form">
-          <Button colorScheme="teal">Add New Property</Button>
-        </Link>
-        <Box>
-          <Heading size="md" mb={3}>
-            Your Properties
-          </Heading>
-          <PropertyList />
-        </Box>
+        <VStack align="stretch" spacing={4}>
+          <Text>First Name: {user?.fName}</Text>
+          <Text>Last Name: {user?.lName}</Text>
+          <Text>Address: {user?.address}</Text>
+          <Text>Phone Number: {user?.phoneNumber}</Text>
+          <Text>Email: {user?.email}</Text>
+        </VStack>
       </Box>
+      <Box mt={6} width="full" maxW="md">
+        <Link to="/property-form">
+          <Button colorScheme="teal" width="full" size="lg">Add New Property</Button>
+        </Link>
+      </Box>
+      
     </Flex>
   );
 };
