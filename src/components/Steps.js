@@ -27,14 +27,14 @@ const Steps = () => {
   };
 
   return (
-    <Box className="steps" p={{ base: "12", lg: "120" }} bg="white">
+    <Box className="steps" p={{ base: "0", lg: "120" }} bg="white">
       <Box className="container"  >
         <Flex className="row" gap={20} >
           <Box
             className="col-md-6"
             flex={1}
             bg="#0D6EFD"
-            borderRadius={12}
+            borderRadius={{ base: "0", lg: "md" }}
             p={6}
             minW={{ base: "full", lg: "400px" }}
           >

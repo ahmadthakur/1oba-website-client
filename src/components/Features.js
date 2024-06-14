@@ -40,13 +40,13 @@ const gridItems = [
 
 export default function Features() {
   return (
-    <Box as="section" className="features" bg="#f8f9fa" py={120} color="black">
+    <Box as="section" className="features" bg="#f8f9fa" py={120} color="black" px={8}>
       <Flex className="container" alignItems="center" flexDirection="column">
         <VStack align="center" mb="5">
-          <Heading as="h1" mb="4">
+          <Heading as="h1" mb="4" textAlign={"center"}>
             Discover a better way to sell your home
           </Heading>
-          <Text color="gray.600">
+          <Text color="gray.600" textAlign={"center"}>
             Explore how our innovative solutions can make your selling
             experience smooth and efficient.
           </Text>
@@ -76,7 +76,7 @@ export default function Features() {
                   <Flex
                     direction="column"
                     justifyContent="space-between"
-                    width={{base: "500px", md: "280px"}}
+                    width={{base: "300px", md: "280px"}}
                     height="280px"
                     textAlign="center"
                     alignItems="center"

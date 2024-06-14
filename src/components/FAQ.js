@@ -57,7 +57,7 @@ function FAQ() {
         <Heading className="faq-header">Frequently Asked Questions</Heading>
       </Box>
       <Box width={{ base: "100%", lg: "800px" }}>
-        <Accordion defaultIndex={[0]} allowMultiple>
+        <Accordion allowMultiple>
           {faqItems.map((item, index) => (
             <AccordionItem
               key={index}

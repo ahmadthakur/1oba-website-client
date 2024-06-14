@@ -34,16 +34,21 @@ export default function NavigationBar() {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box px={{ base: 0, xl: 20 }}>
+    <Box
+      px={{ base: 0, xl: 20 }}
+      bg={useColorModeValue("gray.800", "gray.800")}
+      color={useColorModeValue("gray.600", "white")}
+      borderColor={useColorModeValue("gray.800", "gray.800")}
+      width={"100%"}
+    >
       <Flex
-        bg={useColorModeValue("white", "gray.800")}
-        color={useColorModeValue("gray.600", "white")}
+       
         minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        
         align={"center"}
       >
         <Flex
@@ -142,8 +147,8 @@ export default function NavigationBar() {
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue("gray.600", "gray.200");
-  const linkHoverColor = useColorModeValue("gray.800", "blue.600");
+  const linkColor = useColorModeValue("gray.200", "gray.200");
+  const linkHoverColor = useColorModeValue("blue.800", "blue.800");
 
   return (
     <Stack direction={"row"} spacing={4}>

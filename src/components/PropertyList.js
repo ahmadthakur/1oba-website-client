@@ -11,6 +11,7 @@ import {
   GridItem,
   useColorModeValue,
   Heading,
+  AspectRatio
 } from "@chakra-ui/react";
 import { MapPin } from "react-feather";
 
@@ -35,51 +36,53 @@ const PropertyList = () => {
       <Grid templateColumns="repeat(auto-fill, minmax(250px, 1fr))" gap={6}>
         {properties.map((property) => (
           <GridItem key={property._id}>
-            <Box
-              bg={"white"}
-              color={"gray.800"}
-              borderWidth="1px"
-              rounded="lg"
-              shadow="lg"
-              p={5}
-              d="flex"
-              flexDirection="column"
-              justifyContent="space-between" // Ensures that the button aligns to the bottom
-            >
-              <Image
-                src={property.imageURL || "https://via.placeholder.com/150"}
-                alt={`Picture of ${property.title}`}
-                roundedTop="lg"
-                w="full"
-                h="200px"
-              />
-              <Box py={4}>
-                <Flex alignItems="center" mb={2} gap={2}>
-                  <MapPin size="16" />
-                  <Text fontWeight="bold" isTruncated>
-                    {property.location}
-                  </Text>
-                </Flex>
-                <Text fontSize="xl" fontWeight="semibold" mb={2} isTruncated>
-                  {property.title}
-                </Text>
-                <Text mb={2} isTruncated>
-                  {property.description}
-                </Text>
-                <Flex justifyContent="space-between" alignItems="center">
-                  <Text fontWeight="bold">
-                    £{new Intl.NumberFormat("en-GB").format(property.price)}
-                  </Text>
-                  <Badge colorScheme="green">
-                    {property.numberOfRooms} Rooms
-                  </Badge>
-                </Flex>
-              </Box>
-              <Button colorScheme="blue" mt={4} alignSelf="center">
-                See Details
-              </Button>
-            </Box>
-          </GridItem>
+            <AspectRatio ratio={1} w="full">
+      <Image
+        src={property.imageURL || "https://via.placeholder.com/150"}
+        alt={`Picture of ${property.title}`}
+        roundedTop="lg"
+        objectFit="cover"
+      />
+    </AspectRatio>
+  <Box
+    bg={"white"}
+    color={"gray.800"}
+    borderWidth="1px"
+    rounded="lg"
+    shadow="lg"
+    p={5}
+    d="flex"
+    flexDirection="column"
+    justifyContent="space-between" // Ensures that the button aligns to the bottom
+  >
+    
+    <Box py={4}>
+      <Flex alignItems="center" mb={2} gap={2}>
+        <MapPin size="16" />
+        <Text fontWeight="bold" isTruncated>
+          {property.location}
+        </Text>
+      </Flex>
+      <Text fontSize="xl" fontWeight="semibold" mb={2} isTruncated>
+        {property.title}
+      </Text>
+      <Text mb={2} isTruncated>
+        {property.description}
+      </Text>
+      <Flex justifyContent="space-between" alignItems="center">
+        <Text fontWeight="bold">
+          £{new Intl.NumberFormat("en-GB").format(property.price)}
+        </Text>
+        <Badge colorScheme="green">
+          {property.numberOfRooms} Rooms
+        </Badge>
+      </Flex>
+    </Box>
+    <Button colorScheme="blue" mt={4} alignSelf="center">
+      See Details
+    </Button>
+  </Box>
+</GridItem>
         ))}
       </Grid>
     </Box>
